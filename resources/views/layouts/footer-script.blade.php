@@ -29,7 +29,7 @@
 <!-- AdminLTE App -->
 <script type="text/javascript" src={{URL::asset("assets/js/adminlte.js")}}></script>
 <!-- AdminLTE for demo purposes -->
-<script type="text/javascript" src={{URL::asset("dist/js/demo.js")}}></script>
+<script type="text/javascript" src={{URL::asset("assets/js/demo.js")}}></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script type="text/javascript" src={{URL::asset("dist/js/pages/dashboard.js")}}></script>
+<script type="text/javascript" src={{URL::asset("assets/js/pages/dashboard.js")}}></script>
 @yield('scripts')
