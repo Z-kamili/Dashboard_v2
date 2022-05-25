@@ -13,8 +13,8 @@
 <!-- Sparkline -->
 <script type="text/javascript" src={{URL::asset("assets/plugins/sparklines/sparkline.js")}}></script>
 <!-- JQVMap -->
-<script type="text/javascript" src={{URL::asset("assets/plugins/jqvmap/jquery.vmap.min.js")}}></script>
-<script type="text/javascript" src={{URL::asset("assets/plugins/jqvmap/maps/jquery.vmap.usa.js")}}></script>
+{{-- <script type="text/javascript" src={{URL::asset("assets/plugins/jqvmap/jquery.vmap.min.js")}}></script> --}}
+{{-- <script type="text/javascript" src={{URL::asset("assets/plugins/jqvmap/maps/jquery.vmap.usa.js")}}></script> --}}
 <!-- jQuery Knob Chart -->
 <script type="text/javascript" src={{URL::asset("assets/plugins/jquery-knob/jquery.knob.min.js")}}></script>
 <!-- daterangepicker -->

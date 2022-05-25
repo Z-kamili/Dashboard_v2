@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Category\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,8 +18,28 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+
+
+
+Route::group(
+     [
+     'prefix'   => 'Admin',
+     'middleware' => 'auth'
+     ],
+     function(){
+   // categories
+    Route::resource('category','App\Http\Controllers\category\CategoryController');
+
+
+});
+
+
+
 
 require __DIR__.'/auth.php';
