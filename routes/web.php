@@ -33,11 +33,11 @@ Route::group(
      'middleware' => 'auth'
      ],
      function(){
-   // categories
-    Route::resource('category','App\Http\Controllers\category\CategoryController');
 
+     //categories
+     Route::resource('category','App\Http\Controllers\category\CategoryController');
 
-});
+     });
 
 
 

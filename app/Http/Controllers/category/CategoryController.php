@@ -5,6 +5,7 @@ namespace App\Http\Controllers\category;
 use App\Http\Controllers\Controller;
 use App\Models\Categorie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -26,7 +27,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Categorie::get()->all();
+        return view('categories.add',compact('categories'));
     }
 
     /**
@@ -37,7 +39,20 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try
+        {
+            $category = new Categorie();
+            $category->user_id = Auth::user()->id;
+            $category->title = $request->title;
+            $category->description  = $request->Desc;
+            $category->save(); 
+            return redirect()->route('category.create');
+        } 
+        catch(\Exception $e)
+        {
+            dd($e->getMessage());
+        //   return redirect()->back()->with(['error'=>$e->getMessage()]);
+        }
     }
 
     /**

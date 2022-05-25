@@ -45,7 +45,7 @@ User List
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <a type="button" href="{{route('category.index')}}" class="btn btn-primary">Add category</a>
+                    <a type="button" href="{{route('category.create')}}" class="btn btn-primary">Add category</a>
                   <table id="example2" class="table table-bordered table-hover">
                     <thead>
                     <tr>
