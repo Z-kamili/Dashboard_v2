@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\category;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Categorie;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,7 +39,7 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
         try
         {
@@ -46,12 +48,13 @@ class CategoryController extends Controller
             $category->title = $request->title;
             $category->description  = $request->Desc;
             $category->save(); 
+            toastr()->success('Data has been saved successfully!');
             return redirect()->route('category.create');
         } 
         catch(\Exception $e)
         {
-            dd($e->getMessage());
-        //   return redirect()->back()->with(['error'=>$e->getMessage()]);
+          toastr()->error('An error has occurred please try again later.');
+          return redirect()->back()->with(['error'=>$e->getMessage()]);
         }
     }
 
@@ -74,7 +77,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Categorie::findOrFail($id);
+        return view('categories.edit',compact('category'));
     }
 
     /**
@@ -84,9 +88,21 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        //
+        try{
+
+            $category = Categorie::findOrFail($request->id);
+            $category->title = $request->title;
+            $category->description  = $request->Desc;
+            $category->save();
+            toastr()->success('update successfully');
+            return redirect()->route('category.index');
+
+        }catch(Exception $e)
+        {
+            return redirect()->back()->with(['error' => $e->getMessage()]);
+        }
     }
 
     /**
@@ -97,6 +113,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Categorie::destroy($id);
+        toastr()->success('Data has been saved successfully!');
+        return redirect()->route('category.index');
     }
 }

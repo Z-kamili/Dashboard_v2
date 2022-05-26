@@ -32,4 +32,7 @@
 <script type="text/javascript" src={{URL::asset("assets/js/demo.js")}}></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script type="text/javascript" src={{URL::asset("assets/js/pages/dashboard.js")}}></script>
+@jquery
+@toastr_js
+@toastr_render
 @yield('scripts')

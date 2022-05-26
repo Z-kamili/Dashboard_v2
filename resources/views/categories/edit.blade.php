@@ -29,7 +29,7 @@ Add
             <!-- general form elements -->
             <div class="container card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Quick Example</h3>
+                  <h3 class="card-title">update Category</h3>
                 </div>
                 @if(session()->has('error'))
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -40,21 +40,23 @@ Add
                 </div>
              @endif
                 <!-- form start -->
-                <form method="POST" action="{{route('category.store')}}">
+                <form action="{{route('category.update','test')}}" method="post">
+                    {{method_field('patch')}}
                     @csrf
                   <div class="card-body">
                     <div class="form-group">
                       <label for="exampleInputEmail1">title</label>
-                      <input type="text" name="title" class="form-control" id="exampleInputEmail1" required placeholder="Enter title">
+                      <input type="text" value="{{$category->title}}"  name="title" class="form-control" id="exampleInputEmail1" required placeholder="Enter title">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword1">Description</label>
-                      <textarea  class="form-control" name="Desc" id="exampleFormControlTextarea1" required rows="3"></textarea>
+                      <textarea  class="form-control" name="Desc" id="exampleFormControlTextarea1" required rows="3">{{$category->description}}</textarea>
                     </div>
+                    <input type="hidden" value="{{$category->id}}"  name="id" class="form-control" id="exampleInputEmail1" required placeholder="Enter title">
                   </div>
                   <!-- /.card-body -->
                   <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                    <button type="submit" class="btn btn-primary">update</button>
                   </div>
                 </form>
             </div>
