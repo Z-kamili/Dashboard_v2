@@ -64,7 +64,7 @@ User List
                   <td>{{$category->title}}</td>
                   <td>{{$category->description}}</td>
                   <td>
-                    <a href="{{route('category.edit',$category->id)}}" class="btn btn-info btn-sm" role="button" aria-pressed="true"><i class="fa fa-edit"></i></a>
+                    <a href="{{route('category.edit',encrypt($category->id))}}" class="btn btn-info btn-sm" role="button" aria-pressed="true"><i class="fa fa-edit"></i></a>
                     <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete_category{{$category->id}}" title="{{ trans('Grades_trans.Delete') }}"><i class="fa fa-trash"></i></button>
                   </td>
                   </tr>

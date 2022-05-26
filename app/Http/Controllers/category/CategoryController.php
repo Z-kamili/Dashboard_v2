@@ -8,6 +8,7 @@ use App\Models\Categorie;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class CategoryController extends Controller
 {
@@ -77,7 +78,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Categorie::findOrFail($id);
+        $cat_id = Crypt::decrypt($id);
+        $category = Categorie::findOrFail($cat_id);
         return view('categories.edit',compact('category'));
     }
 
