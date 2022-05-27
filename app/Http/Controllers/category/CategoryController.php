@@ -4,7 +4,8 @@ namespace App\Http\Controllers\category;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
-use App\Models\Categorie;
+use App\Interfaces\CrudRepositoryInterface;
+use App\Models\Category;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +13,15 @@ use Illuminate\Support\Facades\Crypt;
 
 class CategoryController extends Controller
 {
+
+    private $category;
+
+    public function __construct(CrudRepositoryInterface $category)
+    {
+      return  $this->category = $category;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -19,9 +29,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Categorie::get()->all();
-        return view('categories.categories',compact('categories'));
+      return $this->category->index();
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -30,8 +40,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories = Categorie::get()->all();
-        return view('categories.add',compact('categories'));
+      return $this->category->create();
     }
 
     /**
@@ -42,21 +51,7 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        try
-        {
-            $category = new Categorie();
-            $category->user_id = Auth::user()->id;
-            $category->title = $request->title;
-            $category->description  = $request->Desc;
-            $category->save(); 
-            toastr()->success('Data has been saved successfully!');
-            return redirect()->route('category.create');
-        } 
-        catch(\Exception $e)
-        {
-          toastr()->error('An error has occurred please try again later.');
-          return redirect()->back()->with(['error'=>$e->getMessage()]);
-        }
+      return  $this->category->store($request);
     }
 
     /**
@@ -78,9 +73,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $cat_id = Crypt::decrypt($id);
-        $category = Categorie::findOrFail($cat_id);
-        return view('categories.edit',compact('category'));
+      return  $this->category->edit($id);
     }
 
     /**
@@ -92,19 +85,7 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, $id)
     {
-        try{
-
-            $category = Categorie::findOrFail($request->id);
-            $category->title = $request->title;
-            $category->description  = $request->Desc;
-            $category->save();
-            toastr()->success('update successfully');
-            return redirect()->route('category.index');
-
-        }catch(Exception $e)
-        {
-            return redirect()->back()->with(['error' => $e->getMessage()]);
-        }
+        return  $this->category->update($request);
     }
 
     /**
@@ -115,8 +96,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Categorie::destroy($id);
-        toastr()->success('Data has been saved successfully!');
-        return redirect()->route('category.index');
+        return  $this->category->destroy($id);
     }
 }
