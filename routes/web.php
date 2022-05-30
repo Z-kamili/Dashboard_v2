@@ -37,6 +37,9 @@ Route::group(
      //categories
      Route::resource('category','App\Http\Controllers\category\CategoryController');
 
+     //articles 
+     Route::resource('articles','App\Http\Controllers\article\ArticleController');
+
      });
 
 
