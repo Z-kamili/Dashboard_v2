@@ -116,33 +116,52 @@ article
                     <h3 class="card-title">Create New Articles</h3>
                   </div>
                   <!-- /.card-header -->
-                  <form action="{{route('articles.store')}}" method="POST" enctype="multipart/form-data">
+                  <form action="{{route('articles.update','test')}}" method="POST" enctype="multipart/form-data">
+                    {{method_field('patch')}}
                       @csrf
                     <div class="card-body">
                         <div class="form-group">
                             <label>category</label>
+                            <?php $id = 0 ?>
                           <select class="form-control" required name="category" required>
-                              <option selected="true" disabled="disabled">choices</option>
-                              @foreach($category as $value)
-                                  <option value="{{$value->id}}">{{$value->title}}</option>
-                              @endforeach
+                              {{-- {{dd($article->article_category)}} --}}
+                                {{-- <option selected="true" disabled="disabled">choices</option> --}}
+                                @if($article->article_category()->exists())
+                                    
+                                     @foreach($article->article_category as $value) 
+                                       {{ $id = $value->id }}
+                                       <option value="{{$value->id}}"> {{$value->title}} </option>
+                                    @endforeach 
+
+                                @endif
+                                @foreach($category as $value)
+                                    @if($value->id !== $id)
+                                         <option value="{{$value->id}}">{{$value->title}}</option>
+                                    @endif
+                                @endforeach
+                             
                           </select>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" name="title" required placeholder="Title:">
+                            <input class="form-control" value="{{$article->title}}" name="title" required placeholder="Title:">
                           </div>
                         <div class="form-group">
                             <textarea id="compose-textarea" name="desc" required class="form-control" style="height: 300px">
-
+                                  {{$article->description}}
                             </textarea>
                         </div>
                         <div class="form-group">
                           <div class="btn btn-default btn-file">
                             <i class="fas fa-paperclip"></i> Images
                             <input type="file" accept="image/*" onchange="loadFile(event)" name="photo">
-                            <img  width="100%" height="100%" id="output"/>
+                            @if($article->image()->exists())
+                            <img src="{{ URL::asset('Article/img/articles/'.$article->image->filename) }}"  width="100%" height="100%" id="output"/>
+                            @endif
                           </div>
                         </div>
+                      </div>
+                      <div class="form-group">
+                        <input class="form-control" value="{{$article->id}}" name="id" type="hidden">
                       </div>
                       <!-- /.card-body -->
                       <div class="card-footer">

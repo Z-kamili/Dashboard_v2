@@ -18,15 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
-
-
-
 Route::group(
      [
      'prefix'   => 'Admin',
@@ -34,11 +25,14 @@ Route::group(
      ],
      function(){
 
-     //categories
-     Route::resource('category','App\Http\Controllers\category\CategoryController');
+      //Dashboard
+      Route::get('/dashboard', function () { return view('dashboard');})->name('dashboard');
 
-     //articles 
-     Route::resource('articles','App\Http\Controllers\article\ArticleController');
+      //categories
+      Route::resource('category','App\Http\Controllers\category\CategoryController');
+
+      //articles 
+      Route::resource('articles','App\Http\Controllers\article\ArticleController');
 
      });
 

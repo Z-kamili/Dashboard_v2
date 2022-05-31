@@ -3,14 +3,17 @@
 namespace App\Traits;
 
 use App\Models\Image;
-use Illuminate\Http\Client\Request;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 trait UploadTrait {
 
     public function verifyAndStoreImage(Request $request,$inputname,$foldername,$disk,$imageable_id,$imageable_type)
     {
 
-              if($request->hasfile($inputname)){
+              if($request->hasFile($inputname))
+              {
+                
                   // check img
                   if(!$request->file($inputname)->isValid()) {
 
@@ -19,9 +22,11 @@ trait UploadTrait {
 
                   }
 
+                  
                   $photo = $request->file($inputname);
-                  $name = \Str::slug($request->input('name'));
+                  $name = "article_img" . $imageable_id;
                   $filename = $name . '.' . $photo->getClientOriginalExtension();
+
 
                   // insert Image
                   $Image = new Image();
@@ -36,6 +41,12 @@ trait UploadTrait {
             return null;
 
 
+    }
+
+    public function Delete_attachment($disk,$path,$id)
+    {
+        Storage::disk($disk)->delete($path);
+        image::where('imageable_id',$id)->delete();
     }
 
 

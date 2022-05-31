@@ -51,26 +51,25 @@ User List
                     <tr>
                       <th>id</th>
                       <th>Title</th>
-                      <th>Description</th>
                       <th>Processes</th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php $id = 0; ?>
-                  {{-- @foreach($categories as $category)
+                  @foreach($articles as $article)
                   <tr>
                   <?php $id++ ?>
                   <td>{{$id}}</td>
-                  <td>{{$category->title}}</td>
-                  <td>{{$category->description}}</td>
+                  <td>{{$article->title}}</td>
+                  {{-- <td>{{$article->description}}</td> --}}
                   <td>
-                    <a href="{{route('category.edit',encrypt($category->id))}}" class="btn btn-info btn-sm" role="button" aria-pressed="true"><i class="fa fa-edit"></i></a>
-                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete_category{{$category->id}}" title="{{ trans('Grades_trans.Delete') }}"><i class="fa fa-trash"></i></button>
+                    <a href="{{route('articles.edit',encrypt($article->id))}}" class="btn btn-info btn-sm" role="button" aria-pressed="true"><i class="fa fa-edit"></i></a>
+                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete_articles{{$article->id}}" title="{{ trans('Grades_trans.Delete') }}"><i class="fa fa-trash"></i></button>
                   </td>
                   </tr>
-                  <div class="modal fade" id="delete_category{{$category->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade" id="delete_articles{{$article->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
-                        <form action="{{route('category.destroy',$category->id)}}" method="post">
+                        <form action="{{route('articles.destroy',$article->id)}}" method="post">
                             {{method_field('delete')}}
                             {{csrf_field()}}
                         <div class="modal-content">
@@ -82,7 +81,7 @@ User List
                             </div>
                             <div class="modal-body">
                                 <p>do you really want to delete this category</p>
-                                <input type="hidden" value="{{$category->id}}" name="id">
+                                <input type="hidden" value="{{$article->id}}" name="id">
                             </div>
                             <div class="modal-footer">
                                 <div class="modal-footer">
@@ -91,7 +90,7 @@ User List
                                 </div>
                             </div>
                         </div>
-                  @endforeach --}}
+                  @endforeach
 
                     </tbody>
                   </table>
