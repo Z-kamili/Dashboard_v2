@@ -168,6 +168,7 @@ class ArticleController extends Controller
             $article = Article::findorfail($request)->delete();
             toastr()->success('Data has been deleted!');
             return redirect()->route('articles.index');
+            
         }catch(\Exception $e)
         {
 
