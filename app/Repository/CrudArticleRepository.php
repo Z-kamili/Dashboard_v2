@@ -30,7 +30,6 @@ class CrudArticleRepository implements CrudArticleInterface
 
     public function create() 
     {
-
         //create  
         $category = Category::get()->all();
         return view('articles.add',compact('category'));  

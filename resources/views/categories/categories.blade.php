@@ -34,6 +34,7 @@ User List
 
 @section('content')
 
+
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
@@ -56,7 +57,7 @@ User List
                     </tr>
                     </thead>
                     <tbody>
-                    <?php $id = 0; ?>
+                  <?php $id = 0; ?>
                   @foreach($categories as $category)
                   <tr>
                   <?php $id++ ?>

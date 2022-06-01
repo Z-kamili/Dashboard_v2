@@ -116,6 +116,14 @@ article
                     <h3 class="card-title">Create New Articles</h3>
                   </div>
                   <!-- /.card-header -->
+                  @if(session()->has('error'))
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                      <strong>{{ session()->get('error') }}</strong>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  @endif
                   <form action="{{route('articles.update','test')}}" method="POST" enctype="multipart/form-data">
                     {{method_field('patch')}}
                       @csrf

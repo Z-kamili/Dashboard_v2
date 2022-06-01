@@ -25,7 +25,8 @@ Route::group(
      ],
      function(){
 
-      //Dashboard
+
+      //dashboard
       Route::get('/dashboard', function () { return view('dashboard');})->name('dashboard');
 
       //categories
@@ -34,7 +35,12 @@ Route::group(
       //articles 
       Route::resource('articles','App\Http\Controllers\article\ArticleController');
 
-     });
+      //calendar
+      Route::resource('calendar','App\Http\Controllers\calendar\CalendarController');
+
+
+
+    });
 
 
 
