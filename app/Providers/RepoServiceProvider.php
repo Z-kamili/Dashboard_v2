@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Interfaces\CrudArticleInterface;
 use App\Interfaces\CrudRepositoryInterface;
+use App\Repository\CrudArticleRepository;
 use App\Repository\CrudRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -16,6 +18,7 @@ class RepoServiceProvider extends ServiceProvider
     public function register()
     { 
         $this->app->bind(CrudRepositoryInterface::class,CrudRepository::class);
+        $this->app->bind(CrudArticleInterface::class,CrudArticleRepository::class);
     }
 
     /**
